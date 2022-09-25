@@ -22,3 +22,23 @@ function find(city){
 
 //set up API Key
 var apiKey ="0af2b24c3a2c8ccf342a6bfcd937034b";
+
+//Displays the weather
+function weather(event){
+    event.preventDefault();
+    if(searchCity.val().trim()!==""){
+        city=searchCity.val().trim();
+        currentWeather(city);
+    }
+}
+
+function currentWeather(city) {
+    var queryURL= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + apiKey;
+    $.ajax({
+        url:queryURL,
+        method:"GET",
+    }).then(function(response) {
+        console.log(response);
+
+    }
+}
