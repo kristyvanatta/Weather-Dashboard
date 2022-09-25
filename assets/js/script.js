@@ -58,5 +58,37 @@ function currentWeather(city) {
         var windmph=(ws*2.237).toFixed(1);
         $(currentWSpeed).html(windmph+"MPH");
 
-    }
+        //UV Index
+        UVIndex (response.coord.lon, respndse.coord.lat);
+        forecast(response.id);
+        if(response.cod==200){
+            searchCity=JSON.parse(localStorage.getItem("cityName"));
+            console.log(searchCity);
+            if (searchCity==null){
+                searchCity=[];
+                searchCity.push(city.toUpperCase)
+    
+                localStorage.setItem("cityName",JSON.stringify(searchCity));
+                addToList(city);
+            }
+            else {
+                if(find(city)>0){
+                    searchCity.push(city.toUpperCase());
+                    localStorage.setItem("cityName",JSON.stringify(searchCity));
+                    addToList(city);
+                }
+            }
+        }
+
+    });
+}
+
+function UVIndex(ln,lt) {
+    var uviURL ="https://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey+ "&lat="+lt+"&lon="+ln;
+    $.ajax({
+        url:uviURL,
+        method: "GET"
+    }).then(function(response){
+    
+        });
 }
