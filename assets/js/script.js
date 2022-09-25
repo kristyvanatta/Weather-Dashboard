@@ -40,5 +40,23 @@ function currentWeather(city) {
     }).then(function(response) {
         console.log(response);
 
+        var weathericon = response.weather[0].icon;
+        var iconurl ="https://openweathermap.org/img/wn/" +weathericon +"@2x.png";
+        
+        var date= new Date(response.dt*1000).toLocaleDateString();
+        $(currentCity).html(response.name +"("+date`,<img src=${iconurl}>`);
+
+        //current temperature
+        var tempF = (response.main.temp -273.15) *1.80 +32;
+        $(currentTemp).html((tempF).toFixed(2)+"&#8457");
+
+        //humidity
+        $(currentHumidity).html(response.main.humidity+"%");
+
+        //wind
+        var ws=response.wind.speed;
+        var windmph=(ws*2.237).toFixed(1);
+        $(currentWSpeed).html(windmph+"MPH");
+
     }
 }
