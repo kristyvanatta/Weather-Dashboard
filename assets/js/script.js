@@ -7,7 +7,7 @@ var currentUvindex =$("#uv-index");
 var currentWind =$("#wind");
 var currentTemp =$("#temperature");
 var currentHumidity =$("#humidity");
-var searchCity =[];
+
 
 //city search
 function find(city){
@@ -32,7 +32,8 @@ function weather(event){
 }
 
 function currentWeather(city) {
-    var queryURL= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + apiKey;
+    city = $("#city-search").val();
+    var queryURL= "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + apiKey;
     $.ajax({
         url:queryURL,
         method:"GET",
@@ -40,7 +41,7 @@ function currentWeather(city) {
         console.log(response);
 
         var weathericon = response.weather[0].icon;
-        var iconurl ="https://openweathermap.org/img/wn/" +weathericon +"@2x.png";
+        var iconurl ="http://openweathermap.org/img/wn/" +weathericon +"@2x.png";
         
         var date= new Date(response.dt*1000).toLocaleDateString();
         $(currentCity).html(response.name +"("+date`,<img src=${iconurl}>`);
@@ -83,7 +84,7 @@ function currentWeather(city) {
 }
 
 function UVIndex(ln,lt) {
-    var uviURL ="https://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey+ "&lat="+lt+"&lon="+ln;
+    var uviURL ="http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey+ "&lat="+lt+"&lon="+ln;
     $.ajax({
         url: uviURL,
         method: "GET"
@@ -93,8 +94,8 @@ function UVIndex(ln,lt) {
 }
 
 function forecast(cityid) {
-    var dayOver= false;
-    var queryforecastURL="https://api.openweathermap.org/data/2.5/forecast?id="+cityid+"&appid="+apiKey;
+   // var dayOver= false;
+    var queryforecastURL="http://api.openweathermap.org/data/2.5/forecast?q={cityName}&appid={apiKey}";
     $.ajax({
         url:queryforecastURL,
         method:"GET"
@@ -103,7 +104,7 @@ function forecast(cityid) {
         for (i=0; i<5; i++) {
             var date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
             var iconcode= response.list[((i+1)*8)-1].weather[0].icon;
-            var iconurl= "https://openweathermap.org/img/wn/"+iconcode+".png";
+            var iconurl= "http://openweathermap.org/img/wn/"+iconcode+".png";
             var temp1= response.list[((i+1)*8)-1].main.temp;
             var tempF= (((temp1 -273.5)*1.80)+32).toFixed(2);
             var humidity = response.list[((i+1)*8)-1].main.humidity;
@@ -145,6 +146,7 @@ function loadLastCity() {
 }
 
 
-$("search-button").on("click",displayWeather);
+$("#search-button").on("click",currentWeather);
 $(document).on("click",pastSearch);
 $(window).on("load", loadLastCity);
+console.log("hello");
