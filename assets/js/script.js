@@ -30,7 +30,7 @@ function weather(event){
         currentWeather(city);
     }
 }
-
+//change this to a fetch request
 function currentWeather(city) {
     city = $("#city-search").val();
     var queryURL= "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + apiKey;
