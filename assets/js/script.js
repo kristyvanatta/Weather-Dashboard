@@ -2,7 +2,6 @@
 var city="";
 var searchCity =$("#search-city");
 var searchButton =$("#search-button");
-var clearButton =$("#clear-history");
 var currentCity =$("#current-city");
 var currentUvindex =$("#uv-index");
 var currentWind =$("#wind");
@@ -96,11 +95,52 @@ function UVIndex(ln,lt) {
 function forecast(cityid) {
     var dayOver= false;
     var queryforecastURL="https://api.openweathermap.org/data/2.5/forecast?id="+cityid+"&appid="+apiKey;
-    ({
+    $.ajax({
         url:queryforecastURL,
         method:"GET"
-    }).then(function(){
+    }).then(function(response){
 
+        for (i=0; i<5; i++) {
+            var date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
+            var iconcode= response.list[((i+1)*8)-1].weather[0].icon;
+            var iconurl= "https://openweathermap.org/img/wn/"+iconcode+".png";
+            var temp1= response.list[((i+1)*8)-1].main.temp;
+            var tempF= (((temp1 -273.5)*1.80)+32).toFixed(2);
+            var humidity = response.list[((i+1)*8)-1].main.humidity;
+
+            $("#futureDate"+i).html(date);
+            $("#futureImg"+i).html("<img src="+iconurl+">");
+            $("#futureTemp"+i).html(tempF+"&#8457");
+            $("#futureHumidity"+i).html(humidity+"%");
+        }
+    });
+}
+
+function addToList(city) {
+    var listEl =$("<li>"+city.toUpperCase()+"</li>");
+    $(listEl).attr("class", "list-group-item");
+    $(listEl).attr("data-value", city.toUpperCase());
+    $(".historyList").append(listEl);
+}
+
+function pastSearch(event) {
+    var liEl= event.target;
+    if (event.target.matches("li")) {
+        city= liEl.tectContent.trim();
+        currentWeather(city);
+    }
+}
+
+function loadLastCity() {
+    $("ul").empty();
+    var searchCity =JSON.parse(localStorage.getItem("cityName"));
+    if (searchCity!==null) {
+        searchCity =JSON.parse(localStorage.getItem("cityName"));
+        for(i=0; i<searchCity.length; i++) {
+            addToList(searchCity[i]);
+        }
+        city= searchCity[i-1];
+        currentWeather(city);
     }
 }
 
@@ -108,4 +148,3 @@ function forecast(cityid) {
 $("search-button").on("click",displayWeather);
 $(document).on("click",pastSearch);
 $(window).on("load", loadLastCity);
-$("#clear-history").on("click",clearHistory);
