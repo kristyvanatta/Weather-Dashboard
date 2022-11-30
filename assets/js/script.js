@@ -46,14 +46,13 @@ function geoWeatherCall(lat, lon){
         console.log(secondData.list[0].wind.speed)
 
         //(0K − 273.15) × 9/5 + 32 = -459.7°F
-        function tempConversion(dataTemp) { return (dataTemp - 273.15) * (9/5) + 32}
+        function tempConversion(dataTemp) { return ((dataTemp - 273.15) * (9/5) + 32).toFixed(2)}
         console.log(tempConversion(secondData.list[0].main.temp));
 
         document.getElementById("temperature").innerHTML = tempConversion(secondData.list[0].main.temp);
         document.getElementById("humidity").innerHTML = secondData.list[0].main.humidity;
         document.getElementById("wind").innerHTML = secondData.list[0].wind.speed;
-        // document.getElementById("wind").innerHTML = secondData.list[0].weather[0].icon;
-
+        
         document.getElementById("futureTemp0").innerHTML = tempConversion(secondData.list[4].main.temp);
         document.getElementById("futureHumidity0").innerHTML = secondData.list[4].main.humidity;
         document.getElementById("futureWind0").innerHTML = secondData.list[4].wind.speed;
