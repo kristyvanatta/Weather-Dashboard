@@ -56,26 +56,31 @@ function geoWeatherCall(lat, lon){
         document.getElementById("futureTemp0").innerHTML = tempConversion(secondData.list[4].main.temp);
         document.getElementById("futureHumidity0").innerHTML = secondData.list[4].main.humidity;
         document.getElementById("futureWind0").innerHTML = secondData.list[4].wind.speed;
-        // document.getElementById("futureImg0").innerHTML = secondData.list[4].weather[4].icon;
+        document.getElementById("futureImg0").setAttribute("src", "https://openweathermap.org/img/w/"+ secondData.list[4].weather[0].icon +".png" );
+        document.getElementById("futureDate0").innerHTML = secondData.list[4].dt_txt.split(" ", 1);
 
         document.getElementById("futureTemp1").innerHTML = tempConversion(secondData.list[12].main.temp);
         document.getElementById("futureHumidity1").innerHTML = secondData.list[12].main.humidity;
         document.getElementById("futureWind1").innerHTML = secondData.list[12].wind.speed;
-        // document.getElementById("futureImg1").innerHTML = secondData.list[12].weather[12].icon;
+        document.getElementById("futureImg1").setAttribute("src", "https://openweathermap.org/img/w/"+ secondData.list[12].weather[0].icon +".png" );
+        document.getElementById("futureDate1").innerHTML = secondData.list[12].dt_txt.split(" ", 1);
 
         document.getElementById("futureTemp2").innerHTML = tempConversion(secondData.list[20].main.temp);
         document.getElementById("futureHumidity2").innerHTML = secondData.list[20].main.humidity;
         document.getElementById("futureWind2").innerHTML = secondData.list[20].wind.speed;
-        // document.getElementById("futureImg2").innerHTML = secondData.list[20].weather[20].icon;
+        document.getElementById("futureImg2").setAttribute("src", "https://openweathermap.org/img/w/"+ secondData.list[20].weather[0].icon +".png" ); 
+        document.getElementById("futureDate2").innerHTML = secondData.list[20].dt_txt.split(" ", 1);
 
         document.getElementById("futureTemp3").innerHTML = tempConversion(secondData.list[28].main.temp);
         document.getElementById("futureHumidity3").innerHTML = secondData.list[28].main.humidity;
         document.getElementById("futureWind3").innerHTML = secondData.list[28].wind.speed;
-        // document.getElementById("futureImg3").innerHTML = secondData.list[28].weather[28].icon;
+        document.getElementById("futureImg3").setAttribute("src", "https://openweathermap.org/img/w/"+ secondData.list[28].weather[0].icon +".png" );
+        document.getElementById("futureDate3").innerHTML = secondData.list[28].dt_txt.split(" ", 1);
 
         document.getElementById("futureTemp4").innerHTML = tempConversion(secondData.list[36].main.temp);
         document.getElementById("futureHumidity4").innerHTML = secondData.list[36].main.humidity;
         document.getElementById("futureWind4").innerHTML = secondData.list[36].wind.speed;
-        // document.getElementById("futureImg4").innerHTML = secondData.list[36].weather[36].icon;
+        document.getElementById("futureImg4").setAttribute("src", "https://openweathermap.org/img/w/"+ secondData.list[36].weather[0].icon +".png" );
+        document.getElementById("futureDate4").innerHTML = secondData.list[36].dt_txt.split(" ", 1);
     })
 }

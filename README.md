@@ -31,3 +31,6 @@ The following image shows the web application's appearance and functionality:
 
 https://github.com/kristyvanatta/Weather-Dashboard
 https://kristyvanatta.github.io/Weather-Dashboard/
+
+
+I commented out the UV index portion as it required One Call API 3.0 that is no longer part of the free version
