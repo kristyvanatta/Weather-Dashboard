@@ -14,7 +14,7 @@ button.addEventListener("click", function(){
 // }
 function openWeatherCall(parameter){
     console.log(parameter);
-    const apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + parameter + "&limit=5&appid=" + openWeatherKey;
+    const apiURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + parameter + "&limit=5&appid=" + openWeatherKey;
 
     fetch(apiURL)
     .then(response => response.json())
@@ -35,7 +35,7 @@ function openWeatherCall(parameter){
 
 
 function geoWeatherCall(lat, lon){
-    const apiURL2 = "http://api.openweathermap.org/data/2.5/forecast?lat=" +lat+ "&lon=" +lon+ "&appid=" + openWeatherKey;
+    const apiURL2 = "https://api.openweathermap.org/data/2.5/forecast?lat=" +lat+ "&lon=" +lon+ "&appid=" + openWeatherKey;
 
     fetch(apiURL2)
     .then(response => response.json())
